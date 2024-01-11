@@ -1,8 +1,10 @@
+import os
 import argparse
 import pathlib
 import torch
 import torch.nn.functional as F
 import torchaudio
+from torchaudio.transforms import Resample
 from hf_ecapa_tdnn import Encoder
 from tqdm import tqdm
 
@@ -11,8 +13,14 @@ classifier = Encoder.from_hparams(
 )
 
 def verification(wav1, wav2):
-    signal1, fs = torchaudio.load(wav1)
-    signal2, fs = torchaudio.load(wav2)
+    signal1, sr1 = torchaudio.load(wav1)
+    signal2, sr2 = torchaudio.load(wav2)
+
+    resample1 = Resample(orig_freq=sr1, new_freq=16000)
+    resample2 = Resample(orig_freq=sr2, new_freq=16000)
+
+    signal1 = resample1(signal1)
+    signal2 = resample2(signal2)
     
     emb1 = classifier.encode_batch(signal1).squeeze(0)
     emb2 = classifier.encode_batch(signal2).squeeze(0)
@@ -29,12 +37,9 @@ def main(args):
     speaker_similarity = 0
     for label in tqdm(groudtruth_wavs):
         filename = str(label).split("/")[-1]
-        if "arabic-speech-corpus" in str(label):
-            pred = f"{args.generated_dir}{filename.replace('wav', 'wav.mel_generated_e2e.wav')}"
-        else:
-            pred = f"{args.generated_dir}{filename.replace('wav', 'mel_generated_e2e.wav')}"
+        pred = os.path.abspath(os.path.join(args.generated_dir, filename))
         speaker_similarity += verification(label, pred)
-        
+    
     print("Avg speaker similarity: ", speaker_similarity/len(groudtruth_wavs))
 
 
