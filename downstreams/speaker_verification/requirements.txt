@@ -83,3 +83,4 @@ sentencepiece==0.1.96 \
     --hash=sha256:fd907a8f744e5337de7fc532dd800c4416b571ea47f8c3c66be10cd1bc67c925 \
     --hash=sha256:ff7d752a7f82d87711ec1a95c2262cb74f98be5b457f0300d81a1aefe5be2a95
 
+urllib3>=2.2.2 # not directly required, pinned by Snyk to avoid a vulnerability
