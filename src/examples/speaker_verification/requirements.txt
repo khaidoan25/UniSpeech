@@ -4,3 +4,6 @@ sklearn
 s3prl
 torchaudio==0.9.0
 sentencepiece
+filelock>=3.20.3 # not directly required, pinned by Snyk to avoid a vulnerability
+torch>=2.9.0 # not directly required, pinned by Snyk to avoid a vulnerability
+urllib3>=2.6.3 # not directly required, pinned by Snyk to avoid a vulnerability
