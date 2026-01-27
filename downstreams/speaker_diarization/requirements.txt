@@ -6,7 +6,7 @@ SoundFile==0.10.3.post1 \
     --hash=sha256:b361d4ac1519a2e516cabafa6bf7e93492f999f35d7d25350cd87fdc3e5cb27e
 fire==0.4.0 \
     --hash=sha256:c5e2b8763699d1142393a46d0e3e790c5eb2f0706082df8f647878842c216a62
-sentencepiece==0.1.96 \
+sentencepiece==0.2.1 \
     --hash=sha256:1dac8c2ad02b5ebc1179c0a14cbc7d7c6f4fd73d4dd51820626402d0aefc974e \
     --hash=sha256:26d20d713b3ba1b7a19205336afb1e93a4327c372b2f795e907b8dc2315ac92e \
     --hash=sha256:335bf84d72112cc91f3c3b691d61802fc963503b7772fd8280d20368048b8f3e \
@@ -134,3 +134,4 @@ torchaudio==0.9.0 \
     --hash=sha256:efb16c593b2a5ada07b180580c7612617e84f4714ce86928ad54baefe71ef29d
 s3prl==0.3.1 \
     --hash=sha256:e497989b10d4e058b619cf3e7a547820fceb3fe18c14c566427eb7b8c770d62e
+torch>=2.10.0 # not directly required, pinned by Snyk to avoid a vulnerability
